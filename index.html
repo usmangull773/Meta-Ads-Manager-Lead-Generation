@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bennett Meta Advertising and Measurement Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#F8F9FB; --surface:#FFFFFF; --surface-2:#F0F3F8;
+  --ink:#141821; --ink-2:#39414E; --muted:#6A7280; --line:#E4E8EF; --line-2:#EEF1F6;
+  --accent:#2A4EA8; --accent-soft:#7E97CE;
+  --good:#1A7F52; --good-bg:#EAF5EF; --good-line:#CBE7D8;
+  --alert:#C13B32; --alert-bg:#FBEDEA; --alert-line:#F2D3CE;
+  --shadow-sm:0 1px 2px rgba(20,24,33,.05);
+  --shadow:0 2px 6px rgba(20,24,33,.05), 0 18px 40px -20px rgba(20,24,33,.16);
+  --r:14px; --maxw:1120px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12141A; --surface:#191C24; --surface-2:#20242E;
+    --ink:#EDEFF4; --ink-2:#C6CAD4; --muted:#98A0AE; --line:#2A2F3A; --line-2:#232732;
+    --accent:#8AA4DC; --accent-soft:#5D75AE;
+    --good:#5FCB9C; --good-bg:#14302599; --good-line:#26483B;
+    --alert:#F0908A; --alert-bg:#39201E99; --alert-line:#57312E;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+    --shadow:0 2px 6px rgba(0,0,0,.3), 0 20px 44px -22px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12141A; --surface:#191C24; --surface-2:#20242E;
+  --ink:#EDEFF4; --ink-2:#C6CAD4; --muted:#98A0AE; --line:#2A2F3A; --line-2:#232732;
+  --accent:#8AA4DC; --accent-soft:#5D75AE;
+  --good:#5FCB9C; --good-bg:#14302599; --good-line:#26483B;
+  --alert:#F0908A; --alert-bg:#39201E99; --alert-line:#57312E;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3);
+  --shadow:0 2px 6px rgba(0,0,0,.3), 0 20px 44px -22px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; letter-spacing:.002em;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px}
+h1,h2,h3{font-family:"Schibsted Grotesk",-apple-system,"Segoe UI",sans-serif; margin:0; text-wrap:balance; letter-spacing:-.025em; font-weight:600}
+p{margin:0}
+.eyebrow{font-family:"Schibsted Grotesk",sans-serif; font-size:12px; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--accent)}
+.muted{color:var(--muted)}
+strong{font-weight:700; color:var(--ink)}
+.rd{color:var(--alert); font-weight:700}
+.gn{color:var(--good); font-weight:700}
+
+/* top bar */
+.topbar{border-bottom:1px solid var(--line); background:var(--surface)}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 32px}
+.brand{display:flex; align-items:center; gap:12px}
+.mark{width:32px;height:32px;border-radius:9px;
+  background:linear-gradient(135deg, var(--accent), var(--accent-soft));
+  display:grid;place-items:center;color:#fff;font-family:"Schibsted Grotesk",sans-serif;font-weight:700;font-size:15px}
+.brand b{font-family:"Schibsted Grotesk",sans-serif; font-weight:600; font-size:14px; letter-spacing:.02em}
+.brand span{display:block; font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-top:2px}
+.tag{font-size:12.5px; color:var(--muted); letter-spacing:.02em}
+
+/* hero */
+.hero .wrap{padding-top:66px; padding-bottom:52px;
+  display:grid; grid-template-columns:1.05fr .95fr; gap:56px; align-items:center}
+.hero .eyebrow{margin-bottom:18px; display:block}
+.hero h1{font-size:clamp(31px,4.4vw,50px); line-height:1.05; font-weight:700; letter-spacing:-.032em}
+.hero h1 .accent{color:var(--accent)}
+.hero .lede{margin-top:22px; font-size:17.5px; line-height:1.58; color:var(--ink-2); max-width:46ch}
+.hero .lede strong{color:var(--ink)}
+
+/* hero visual: signal path */
+.signal{background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); padding:26px 24px}
+.signal .sh{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.signal .sh b{font-family:"Schibsted Grotesk",sans-serif;font-size:13px;font-weight:600;letter-spacing:.02em}
+.signal .sh .badge{font-family:"Schibsted Grotesk",sans-serif;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:100px;color:var(--alert);background:var(--alert-bg);border:1px solid var(--alert-line)}
+.chain{display:flex;align-items:flex-start}
+.node{flex:1;text-align:center;min-width:0}
+.node .dot{width:40px;height:40px;border-radius:11px;margin:0 auto 9px;display:grid;place-items:center;font-size:17px;
+  background:var(--good-bg);border:1.5px solid var(--good);color:var(--good)}
+.node .nt{font-size:11px;font-weight:600;color:var(--ink-2);line-height:1.25}
+.node .ns{font-size:9.5px;color:var(--muted);margin-top:2px;letter-spacing:.03em;text-transform:uppercase}
+.node.gap .dot{background:var(--alert-bg);border-color:var(--alert);color:var(--alert);border-style:dashed}
+.node.gap .nt{color:var(--alert)}
+.link{flex:0 0 16px;height:2px;margin-top:19px;background:var(--good);border-radius:2px}
+.link.broken{background:transparent;border-top:2px dashed var(--alert)}
+.signal .cap{margin-top:20px;padding-top:16px;border-top:1px solid var(--line-2);font-size:13px;color:var(--muted);line-height:1.5}
+.signal .cap strong{color:var(--ink)}
+
+/* tabs */
+.tabsband{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;max-width:var(--maxw);margin:0 auto;padding:10px 32px;overflow-x:auto}
+.tab{appearance:none;border:1px solid transparent;background:transparent;cursor:pointer;
+  font-family:"Schibsted Grotesk",sans-serif;font-size:14px;font-weight:600;color:var(--muted);
+  padding:11px 20px;border-radius:10px;white-space:nowrap;letter-spacing:.01em;transition:all .15s ease}
+.tab:hover{color:var(--ink);background:var(--surface-2)}
+.tab[aria-selected="true"]{color:#fff;background:var(--accent);border-color:var(--accent);box-shadow:var(--shadow-sm)}
+.tab .tn{display:inline-block;width:18px;height:18px;border-radius:6px;background:var(--surface-2);color:var(--muted);font-size:11px;line-height:18px;text-align:center;margin-right:8px;font-weight:700}
+.tab[aria-selected="true"] .tn{background:rgba(255,255,255,.22);color:#fff}
+
+/* panels */
+.panelwrap{padding:52px 0 20px}
+.tabpanel{display:none;animation:fade .28s ease}
+.tabpanel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sec-head{margin-bottom:34px}
+.sec-head .eyebrow{display:block;margin-bottom:12px}
+.sec-head h2{font-size:clamp(23px,2.7vw,31px);line-height:1.12;max-width:22ch}
+.sec-head .sub{margin-top:12px;color:var(--muted);font-size:16px;max-width:60ch}
+
+/* snapshot rows */
+.snap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:6px 24px;margin-bottom:30px}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0;border-top:1px solid var(--line-2)}
+.srow:first-child{border-top:none}
+.srow .st{font-size:14.5px;font-weight:500;line-height:1.35}
+.srow .badge{flex:0 0 auto;font-family:"Schibsted Grotesk",sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;padding:5px 11px;border-radius:100px;white-space:nowrap}
+.badge.ok{color:var(--good);background:var(--good-bg);border:1px solid var(--good-line)}
+.badge.no{color:var(--alert);background:var(--alert-bg);border:1px solid var(--alert-line)}
+
+/* two columns */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:28px}
+.panel .plabel{display:inline-flex;align-items:center;gap:8px;font-family:"Schibsted Grotesk",sans-serif;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:20px}
+.panel .plabel::before{content:"";width:9px;height:9px;border-radius:50%}
+.panel.good .plabel{color:var(--good)} .panel.good .plabel::before{background:var(--good)}
+.panel.bad .plabel{color:var(--alert)} .panel.bad .plabel::before{background:var(--alert)}
+.plist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.plist li{font-size:14.5px;line-height:1.5;color:var(--ink-2);padding-left:20px;position:relative}
+.plist li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%}
+.panel.good .plist li::before{background:var(--good)}
+.panel.bad .plist li::before{background:var(--alert)}
+
+/* system diagram */
+.sys{background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:34px 28px;margin-bottom:24px}
+.sysflow{display:flex;align-items:stretch;gap:0}
+.scol{flex:1;text-align:center;min-width:0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.scol .si{width:52px;height:52px;border-radius:13px;display:grid;place-items:center;font-size:20px;background:var(--surface);border:1.5px solid var(--accent);color:var(--accent)}
+.scol .stt{font-family:"Schibsted Grotesk",sans-serif;font-size:13.5px;font-weight:600;color:var(--ink)}
+.scol .sd{font-size:12px;color:var(--muted);line-height:1.4;max-width:16ch}
+.sarrow{flex:0 0 30px;display:flex;align-items:center;justify-content:center;color:var(--accent-soft);font-size:18px;padding-top:16px}
+.syslayer{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 15px}
+.chip b{display:block;font-family:"Schibsted Grotesk",sans-serif;font-size:13px;font-weight:600;margin-bottom:4px}
+.chip span{font-size:12px;color:var(--muted);line-height:1.4}
+.brandrow{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.brandrow .bl{font-size:12.5px;color:var(--muted);margin-right:4px}
+.pill{font-family:"Schibsted Grotesk",sans-serif;font-size:12px;font-weight:600;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);border-radius:100px;padding:6px 13px}
+
+/* roadmap */
+.road{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:26px 24px;border-top:3px solid var(--accent)}
+.phase .pk{font-family:"Schibsted Grotesk",sans-serif;font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.phase .pw{font-size:12.5px;color:var(--muted);margin:3px 0 15px}
+.phase h3{font-size:18.5px;margin-bottom:11px;line-height:1.22}
+.phase ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+.phase li{font-size:14px;color:var(--ink-2);line-height:1.45;padding-left:18px;position:relative}
+.phase li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent-soft)}
+
+/* proof */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:24px 20px;text-align:center}
+.stat .big{font-family:"Schibsted Grotesk",sans-serif;font-size:32px;font-weight:700;color:var(--accent);letter-spacing:-.03em;line-height:1}
+.stat .sl{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.35}
+.proofgrid{display:grid;grid-template-columns:1.3fr 1fr;gap:22px}
+.caps{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:28px}
+.caps h3{font-size:18px;margin-bottom:16px}
+.caps .capslist{display:flex;flex-wrap:wrap;gap:9px}
+.caps .capslist span{font-size:12.5px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:7px 12px}
+.quote{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:28px;display:flex;flex-direction:column;justify-content:center}
+.quote .stars{color:var(--accent);font-size:15px;letter-spacing:3px;margin-bottom:12px}
+.quote p{font-size:15.5px;line-height:1.55;color:var(--ink);font-family:"Schibsted Grotesk",sans-serif;font-weight:500}
+.quote .who{margin-top:14px;font-size:12.5px;color:var(--muted)}
+
+/* audit band */
+.audit{padding:16px 0 70px}
+.audit .box{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+  padding:44px 44px;display:grid;grid-template-columns:1fr auto;gap:38px;align-items:center}
+.audit .eyebrow{display:block;margin-bottom:14px}
+.audit h2{font-size:clamp(23px,2.7vw,30px);line-height:1.14;max-width:24ch;margin-bottom:14px}
+.audit p{color:var(--ink-2);font-size:16px;max-width:56ch}
+.audit .side{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding-left:38px;border-left:1px solid var(--line)}
+.audit .side .win{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.audit .side .free{font-family:"Schibsted Grotesk",sans-serif;font-weight:700;font-size:24px;color:var(--accent);letter-spacing:-.02em}
+.audit .side .turn{font-family:"Schibsted Grotesk",sans-serif;font-size:22px;font-weight:700;color:var(--ink)}
+.sig{border-top:1px solid var(--line);padding:24px 0 40px;text-align:center;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:36px;padding-top:46px}
+  .cols{grid-template-columns:1fr}
+  .syslayer{grid-template-columns:1fr 1fr}
+  .road{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .proofgrid{grid-template-columns:1fr}
+  .audit .box{grid-template-columns:1fr;gap:26px;padding:32px 26px}
+  .audit .side{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:22px;flex-direction:row;justify-content:center;gap:22px}
+  .sysflow{font-size:14px}
+  .scol .sd{display:none}
+}
+@media (max-width:560px){
+  .wrap{padding:0 20px}
+  .tabs{padding:10px 20px}
+  .sysflow{flex-direction:column;gap:14px}
+  .sarrow{transform:rotate(90deg);padding:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark" aria-hidden="true">P</div>
+      <div><b>Performance Paid Media</b><span>Meta Advertising &amp; Measurement</span></div>
+    </div>
+    <div class="tag">Prepared for Bennett Realty Solutions</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Meta advertising &amp; measurement plan</span>
+      <h1>A Meta system that connects ad spend to <span class="accent">closed deals</span>, across every Bennett brand.</h1>
+      <p class="lede">You already have the hard parts in place: the offers, the funnels, the videos, the CRM, and the email and SMS follow up. What is missing is the <strong>measurement layer</strong> underneath it, the part that shows which ad produced a lead, an appointment, and a sale. That is where this starts.</p>
+    </div>
+    <aside class="signal" aria-label="What is tracked today">
+      <div class="sh"><b>What your ads can measure today</b><span class="badge">Trail breaks after the click</span></div>
+      <div class="chain">
+        <div class="node"><div class="dot" aria-hidden="true">&#9788;</div><div class="nt">Ad seen</div><div class="ns">Tracked</div></div>
+        <div class="link"></div>
+        <div class="node"><div class="dot" aria-hidden="true">&#128070;</div><div class="nt">Page view</div><div class="ns">Tracked</div></div>
+        <div class="link broken"></div>
+        <div class="node gap"><div class="dot" aria-hidden="true">&#9993;</div><div class="nt">Lead</div><div class="ns">Not tied back</div></div>
+        <div class="link broken"></div>
+        <div class="node gap"><div class="dot" aria-hidden="true">&#128197;</div><div class="nt">Appointment</div><div class="ns">Not tied back</div></div>
+        <div class="link broken"></div>
+        <div class="node gap"><div class="dot" aria-hidden="true">&#128176;</div><div class="nt">Sale</div><div class="ns">Not tied back</div></div>
+      </div>
+      <p class="cap">Your spend reaches people and earns page views. After that the trail goes cold: <strong>leads, appointments and closed deals are not connected back to the ad that earned them.</strong></p>
+    </aside>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabsband">
+  <div class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="p1" id="t1"><span class="tn">1</span>The Snapshot</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p2" id="t2"><span class="tn">2</span>The System</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p3" id="t3"><span class="tn">3</span>The Plan</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p4" id="t4"><span class="tn">4</span>The Approach</button>
+  </div>
+</div>
+
+<div class="panelwrap">
+  <div class="wrap">
+
+    <!-- PANEL 1: SNAPSHOT -->
+    <section class="tabpanel active" id="p1" role="tabpanel" aria-labelledby="t1">
+      <div class="sec-head">
+        <span class="eyebrow">Where things stand</span>
+        <h2>A strong base, with a few quiet gaps.</h2>
+        <p class="sub">The parts most businesses struggle to build are already yours. A handful of gaps are keeping your ad spend from showing its real return.</p>
+      </div>
+
+      <div class="snap" aria-label="Your setup today">
+        <div class="srow"><span class="st">Offers, funnels, videos and CRM already built</span><span class="badge ok">In place</span></div>
+        <div class="srow"><span class="st">Meta pixels installed and firing on bennettrealtysolutions.com</span><span class="badge ok">In place</span></div>
+        <div class="srow"><span class="st">Leads and sales tied back to the ad that earned them</span><span class="badge no">Missing</span></div>
+        <div class="srow"><span class="st">Pixels unified into one clean, deduplicated setup</span><span class="badge no">Missing</span></div>
+        <div class="srow"><span class="st">One view of results across all your brands</span><span class="badge no">Missing</span></div>
+      </div>
+
+      <div class="cols">
+        <div class="panel good">
+          <div class="plabel">Working for you</div>
+          <ul class="plist">
+            <li>The <strong>assets are ready</strong>: offers, landing pages, funnels, videos, CRM, and email and SMS follow up.</li>
+            <li>Meta pixels are <strong>already on the site</strong>, so the foundation to measure is there.</li>
+            <li>A <strong>real portfolio of brands</strong>: the brokerage, the academy, the bootcamps, and recruiting, all with audiences to reach.</li>
+          </ul>
+        </div>
+        <div class="panel bad">
+          <div class="plabel">Holding results back</div>
+          <ul class="plist">
+            <li>Campaigns can optimise on <strong class="rd">clicks and views, not yet on leads and sales</strong>, so spend chases traffic instead of revenue.</li>
+            <li><strong class="rd">Several pixels are firing at once</strong>, which splits the data and makes the numbers harder to trust.</li>
+            <li>Tracking sits <strong class="rd">across separate pixels and funnels</strong>, with no single place to see what actually pays back.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 2: SYSTEM -->
+    <section class="tabpanel" id="p2" role="tabpanel" aria-labelledby="t2">
+      <div class="sec-head">
+        <span class="eyebrow">The system</span>
+        <h2>One measured path, from the ad to the closed deal.</h2>
+        <p class="sub">The same structure runs across every brand, so each campaign is judged by leads, appointments and sales, not clicks.</p>
+      </div>
+
+      <div class="sys" aria-label="The measured path">
+        <div class="sysflow">
+          <div class="scol"><div class="si" aria-hidden="true">&#9788;</div><div class="stt">Ad</div><div class="sd">Cold and retargeting, per brand and offer</div></div>
+          <div class="sarrow" aria-hidden="true">&#8594;</div>
+          <div class="scol"><div class="si" aria-hidden="true">&#128241;</div><div class="stt">Landing page</div><div class="sd">Funnel built to convert, not just inform</div></div>
+          <div class="sarrow" aria-hidden="true">&#8594;</div>
+          <div class="scol"><div class="si" aria-hidden="true">&#9993;</div><div class="stt">Lead</div><div class="sd">Captured and passed straight to the CRM</div></div>
+          <div class="sarrow" aria-hidden="true">&#8594;</div>
+          <div class="scol"><div class="si" aria-hidden="true">&#128197;</div><div class="stt">Appointment</div><div class="sd">Booked and tracked as a real event</div></div>
+          <div class="sarrow" aria-hidden="true">&#8594;</div>
+          <div class="scol"><div class="si" aria-hidden="true">&#128176;</div><div class="stt">Sale</div><div class="sd">Value sent back to Meta to optimise on</div></div>
+        </div>
+        <div class="syslayer">
+          <div class="chip"><b>Events and pixel</b><span>Clean, deduplicated events for lead, appointment and sale.</span></div>
+          <div class="chip"><b>Conversions API</b><span>Server side tracking so results hold after iOS changes.</span></div>
+          <div class="chip"><b>CRM sync</b><span>Leads and stages tied back to the ad that earned them.</span></div>
+          <div class="chip"><b>One dashboard</b><span>Cost per lead, per appointment and per sale, in one place.</span></div>
+        </div>
+        <div class="brandrow">
+          <span class="bl">One system, run across:</span>
+          <span class="pill">Brokerage</span>
+          <span class="pill">Academy</span>
+          <span class="pill">Bootcamps</span>
+          <span class="pill">Recruiting</span>
+          <span class="pill">Webinars &amp; events</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 3: PLAN -->
+    <section class="tabpanel" id="p3" role="tabpanel" aria-labelledby="t3">
+      <div class="sec-head">
+        <span class="eyebrow">The plan</span>
+        <h2>Built in order, so each step earns the next.</h2>
+        <p class="sub">Measurement first, then launch, then scale. Nothing is scaled before it can be measured.</p>
+      </div>
+      <div class="road">
+        <div class="phase">
+          <div class="pk">Phase 1</div>
+          <div class="pw">First 2 weeks</div>
+          <h3>Get the measurement right</h3>
+          <ul>
+            <li>Clean up the pixels and set proper <strong>lead, appointment and sale events</strong>.</li>
+            <li>Add <strong>Conversions API</strong> and connect the CRM.</li>
+            <li>Stand up <strong>one dashboard</strong> across the brands.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="pk">Phase 2</div>
+          <div class="pw">Weeks 3 to 6</div>
+          <h3>Launch and learn</h3>
+          <ul>
+            <li>Run <strong>cold campaigns</strong> per brand against the strongest offers.</li>
+            <li>Build <strong>retargeting</strong> from site visitors, video viewers and engagers.</li>
+            <li>Test creatives, headlines and audiences, and read <strong>lead quality</strong>, not volume.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="pk">Phase 3</div>
+          <div class="pw">Weeks 7 to 12</div>
+          <h3>Scale what pays back</h3>
+          <ul>
+            <li><strong>Scale the winners</strong> and cut spend on what does not convert.</li>
+            <li>Expand across brands using what already works.</li>
+            <li>Report every week in <strong>plain, revenue terms</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 4: APPROACH / PROOF -->
+    <section class="tabpanel" id="p4" role="tabpanel" aria-labelledby="t4">
+      <div class="sec-head">
+        <span class="eyebrow">The approach</span>
+        <h2>Numbers pulled from live dashboards, not screenshots.</h2>
+        <p class="sub">The work is measured the same way you want your ads measured: by what is real and attributable, across paid media accounts.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div class="big">10+ yrs</div><div class="sl">Managing paid media across major platforms</div></div>
+        <div class="stat"><div class="big">Top&nbsp;Rated<br>Plus</div><div class="sl">On Upwork, with a 100% job success score</div></div>
+        <div class="stat"><div class="big">7</div><div class="sl">Live paid media accounts managed in a single month</div></div>
+        <div class="stat"><div class="big">GA4 · GTM<br>Meta</div><div class="sl">Certified in the tracking your ads run on</div></div>
+      </div>
+
+      <div class="proofgrid">
+        <div class="caps">
+          <h3>What sits under every campaign</h3>
+          <div class="capslist">
+            <span>Meta Ads</span><span>Meta Pixel</span><span>Conversions API</span><span>iOS14+ tracking</span>
+            <span>GA4</span><span>Google Tag Manager</span><span>Server side tagging</span><span>Retargeting</span>
+            <span>Custom Audiences</span><span>A/B testing</span><span>Lead and webinar funnels</span><span>CRM attribution</span>
+            <span>Looker Studio reporting</span>
+          </div>
+        </div>
+        <div class="quote">
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Our go to person for fixing any ads related problem. He over delivered and we are impressed with his performance."</p>
+          <div class="who">Client review, Facebook conversion event setup</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- FREE AUDIT -->
+<div class="audit">
+  <div class="wrap">
+    <div class="box">
+      <div>
+        <span class="eyebrow">Where we begin</span>
+        <h2>Start with a free audit of your Meta setup.</h2>
+        <p>Before anything else, I will put together a <strong>free audit</strong> of your current pixels, tracking and funnels, showing exactly where leads and sales are going unmeasured today, and the first fixes that change it. Yours to keep either way.</p>
+      </div>
+      <div class="side">
+        <div class="win">Delivered within</div>
+        <div class="free">24 hours</div>
+        <div class="win" style="margin-top:6px">Cost to you</div>
+        <div class="turn">Free</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sig">Prepared for Bennett Realty Solutions &middot; Greenbelt, Maryland</div>
+
+<script>
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.tabpanel'));
+  function select(i){
+    tabs.forEach(function(t,j){
+      var on = j===i;
+      t.setAttribute('aria-selected', on ? 'true':'false');
+      panels[j].classList.toggle('active', on);
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click', function(){ select(i); });
+    t.addEventListener('keydown', function(e){
+      if(e.key==='ArrowRight'){ e.preventDefault(); var n=(i+1)%tabs.length; tabs[n].focus(); select(n); }
+      if(e.key==='ArrowLeft'){ e.preventDefault(); var p=(i-1+tabs.length)%tabs.length; tabs[p].focus(); select(p); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
